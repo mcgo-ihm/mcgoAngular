@@ -1,0 +1,71 @@
+
+<!--
+id: 0, name: 'McGo', description: 'Chaîne de restauration artisanale, rapide et familliale', address: '43 Boulevard Edouard Baudoin, 06160 Antibes', logoURL: '/src/assets/light.jpg', long: 7.115890, lat: 43.563550 
+
+-->
+<div uk-grid>
+  <div class="uk-width-1-1@s uk-width-1-2@m">
+
+    <agm-map id="map"
+    [latitude]="lat" 
+    [longitude]="lng"
+    [zoom]="zoom"
+    [disableDefaultUI]="true"
+    [zoomControl]="false"
+    [disableDoubleClickZoom]="true"
+    [clickableIcons]="false"
+    [usePanning]="false"
+    [streetViewControl]="false"
+    [minZoom]="12"
+    >
+    
+  <agm-direction 
+  *ngIf="dir" 
+  [origin]="dir.origin" 
+  [destination]="dir.destination" 
+  [renderOptions]="renderOptions" 
+  [markerOptions]="markerOptions"
+  [panel]="myPanel"
+  >
+  </agm-direction>
+
+</agm-map>
+  
+
+</div>
+
+<!-- 
+    "distance": 0.753,
+      "streets": [
+        "D35BIS"
+      ],
+      "narrative": "Enter next roundabout and take the 2nd exit onto D35BIS.",
+      "startPoint": {
+        "lng": 7.08991,
+        "lat": 43.596344
+      } 
+    -->
+
+    <div class="uk-width-1-1@s uk-width-1-2@m">
+      <div class="uk-visible@m">
+        <h3 class="uk-text-lead">Route jusqu'au restaurant : {{restaurant.name}}</h3>
+        <p><span class="uk-text-meta">{{restaurant.address}}</span></p>
+        <button class="uk-button uk-button-secondary">Imprimer cette page</button>
+        <div #myPanel></div>
+      </div>
+    </div>
+
+  </div>
+
+ 
+<!-- <div *ngIf="restaurant">
+	<p>Detail is working for {{restaurant.name}}</p>
+	
+	<h2>{{restaurant.name }} Details</h2>
+	<div>
+		<span>id: </span>{{restaurant.id}}
+	</div>
+
+</div>
+
+<button (click)="goBack()">go back</button> -->

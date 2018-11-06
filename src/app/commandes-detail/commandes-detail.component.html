@@ -1,0 +1,11 @@
+<div *ngIf="commande">
+	<p>Detail is working for {{commande.id}}</p>
+	
+	<h2>{{commande.statut | uppercase}} Details</h2>
+	<div>
+		<span>id: </span>{{commande.id}}
+	</div>
+
+</div>
+
+<button (click)="goBack()">go back</button>
