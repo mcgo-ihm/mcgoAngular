@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "routingBaseAngular": {
+    "mcgoAngular": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -35,7 +35,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/routingBaseAngular",
+            "outputPath": "dist/mcgoAngular",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -77,18 +77,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "routingBaseAngular:build"
+            "browserTarget": "mcgoAngular:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "routingBaseAngular:build:production"
+              "browserTarget": "mcgoAngular:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "routingBaseAngular:build"
+            "browserTarget": "mcgoAngular:build"
           }
         },
         "test": {
@@ -127,7 +127,7 @@
         }
       }
     },
-    "routingBaseAngular-e2e": {
+    "mcgoAngular-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -135,11 +135,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "routingBaseAngular:serve"
+            "devServerTarget": "mcgoAngular:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "routingBaseAngular:serve:production"
+              "devServerTarget": "mcgoAngular:serve:production"
             }
           }
         },
@@ -155,5 +155,5 @@
       }
     }
   },
-  "defaultProject": "routingBaseAngular"
+  "defaultProject": "mcgoAngular"
 }
