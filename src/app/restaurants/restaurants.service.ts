@@ -11,7 +11,7 @@ export class RestaurantsService {
 	RESTAURANTS: Restaurant[] = [
 		{ 	
       id: 0, name: 'McGo', description: 'Chaîne de restauration artisanale, rapide et familliale', address: '43 Boulevard Edouard Baudoin, 06160 Antibes',
-      logoURL: '/src/assets/light.jpg', long: 7.115890, lat: 43.563550
+      logoURL: 'assets/light.jpg', long: 7.115890, lat: 43.563550
     }
 	];
 
