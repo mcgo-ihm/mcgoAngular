@@ -14,13 +14,13 @@ export class CommandesService {
 			listePlats: [ "Panini Chèvre Bacon", "Coca-cola Zéro 50cl" ], 
 			statut: "En attente" , 
 			restaurant: 0,
-			imagePrincipale: 'assets/panini-chevre_bacon.jpg'
+			imagePrincipale: 'assets/panini.jpg'
 		},
 		{	id: 999, 
 			listePlats: [ "Pizza Cannibale 32cm", "Coca-cola Zéro 50cl" ], 
 			statut: "Terminé" , 
 			restaurant: 0,
-			imagePrincipale: 'assets/pizza-cannibale.jpg'
+			imagePrincipale: 'assets/pizza.jpg'
 		},
 	];
 
