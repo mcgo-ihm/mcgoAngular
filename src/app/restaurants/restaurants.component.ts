@@ -4,6 +4,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 
 import { RestaurantsService } from './restaurants.service';
 
+import { Plat } from './plat';
 
 @Component({
 	selector: 'app-restaurants',
