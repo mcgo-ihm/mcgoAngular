@@ -5,7 +5,9 @@ import { HttpClientModule } from '@angular/common/http';
 
 // Library google maps
 import { AgmCoreModule } from '@agm/core';
-import { AgmDirectionModule } from 'agm-direction' 
+import { AgmDirectionModule } from 'agm-direction'
+
+import { DeviceDetectorModule } from 'ngx-device-detector'; 
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,6 +33,7 @@ import { DistanceFormatPipe } from './distance-format.pipe';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    DeviceDetectorModule.forRoot(),
 
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCv8Bpz2wUBHrl8ed75wyggnTVrregKx14'

@@ -19,12 +19,26 @@ export class CommandesComponent implements OnInit {
 
 	ngOnInit() {
 		// Récupère la liste de commandes
-		this.commandesService.getAllCommandes().subscribe(comm => this.commandes = comm);
+		this.bindAllCommandes();
 		this.restaurantsServ.getRestaurantById(0).subscribe(restau => this.restaurant = restau);
 	}
 
-	 // getSomeClass(){
-  //       const isValid=this.property1 && this.property2;
-  //       return {someClass1:isValid , someClass2:isValid};
-  //   }
+	showPending(){
+		this.bindAllCommandes();
+		this.commandes = this.commandes.filter(comm => comm.statut === "En attente");
+	}
+
+	showDone(){
+		this.bindAllCommandes();
+		this.commandes = this.commandes.filter(comm => comm.statut === "Terminé");
+	}
+
+	showAll(){
+		this.bindAllCommandes();
+	}
+
+	bindAllCommandes(){
+		this.commandesService.getAllCommandes().subscribe(comm => this.commandes = comm);
+	}
+
 }

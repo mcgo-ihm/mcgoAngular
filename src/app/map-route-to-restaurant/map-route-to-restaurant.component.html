@@ -28,6 +28,13 @@ id: 0, name: 'McGo', description: 'Chaîne de restauration artisanale, rapide et
   >
   </agm-direction>
 
+  <agm-marker 
+      *ngIf="restauPosition"
+      [latitude]="restauPosition.lat"
+      [longitude]="restauPosition.lng">
+    
+  </agm-marker>
+
 </agm-map>
   
 

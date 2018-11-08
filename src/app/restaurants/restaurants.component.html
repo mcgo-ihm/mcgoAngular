@@ -1,31 +1,21 @@
 <div class="uk-cover-container uk-height-medium uk-visible@m">
     <video autoplay loop muted playsinline uk-cover>
-        <source src="https://quirksmode.org/html5/videos/big_buck_bunny.mp4" type="video/mp4">
-        <source src="https://quirksmode.org/html5/videos/big_buck_bunny.ogv" type="video/ogg">
+        <source src="assets/intro.mp4" type="video/mp4">
     </video>
 </div>
 
-<div class="uk-child-width-1-4@m" uk-grid style="padding-top: 20px;">
-    <div>
-        <div class="uk-card uk-card-default">
+<div class="uk-child-width-1-4@m uk-child-width-1-2@s uk-child-width-1-2 uk-grid-match" uk-grid style="padding-top: 20px;">
+    <div *ngFor="let menu of plats">
+        <div class="uk-card uk-card-default uk-box-shadow-large">
             <div class="uk-card-media-top">
-                <img src="assets/light.jpg" alt="">
+                <img *ngIf="!isMobile" src="assets/{{menu.source}}.jpg" alt="Photo de l'élément {{menu.nom}} du menu">
+                <img *ngIf="isMobile" class="mob uk-align-center" src="assets/{{menu.source}}.svg" alt="Représentatio vectorielle de l'élément {{menu.nom}} du menu" uk-svg> 
             </div>
             <div class="uk-card-body">
-                <h3 class="uk-card-title">Media Top</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
-            </div>
-        </div>
-    </div>
-    <div>
-        <div class="uk-card uk-card-default">
-            <div class="uk-card-media-top">
-                <img src="assets/light.jpg" alt="">
-            </div>
-            <div class="uk-card-body">
-                <h3 class="uk-card-title">Media Top</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
+                <h3 class="uk-card-title">{{menu.nom}} <span class="price">{{menu.prix}}€</span></h3>
+                <p>{{menu.description}}</p>
             </div>
         </div>
     </div>
 </div>
+

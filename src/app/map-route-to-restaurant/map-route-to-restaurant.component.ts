@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener, Inject, ElementRef } from '@angular/co
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Location, DOCUMENT } from '@angular/common';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 import { marker } from './marker';
 import { Restaurant } from '../restaurants/restaurant';
@@ -22,36 +23,30 @@ import { LocationService } from '../location.service';
 
 
 export class MapRouteToRestaurantComponent implements OnInit {
-	firstLoad: boolean = true;
 	public dir = undefined;
 	restaurant: Restaurant;
 	distance: number = 15.832;
 	zoom: number = 12;
 	userPosition: any = undefined;
-	// locationsSubscription = locations.subscribe(myObs);
+	restauPosition: any = undefined;
+	isDesktop: boolean;
 
-	public renderOptions = {
-		suppressMarkers: true,
-	}
+	public renderOptions = { suppressMarkers: true, }
 	public markerOptions = {
 	    origin: {
 	        icon: 'https://i.imgur.com/7teZKif.png',
-	        infoWindow: `
-	        <h4>Votre porsition<h4>
-	        <a href='http://www-e.ntust.edu.tw/home.php' target='_blank'>Taiwan Tech</a>`
+	        infoWindow: `<h4>Votre porsition<h4>`
 	    },
 	    destination: {
 	        icon: 'https://i.imgur.com/7teZKif.png',
-	        infoWindow: `
-	        <h4>McGo<h4>
-	        <a href='http://www-e.ntust.edu.tw/home.php' target='_blank'>Taiwan Tech</a>`
+	        infoWindow: `<h4>McGo<h4>`
 	    },
 	};
 
 	steps = [];
 
-	lat: number = 43.646905;
-	lng: number = 7.201743;
+	lat: number = 43.563550;
+	lng: number = 7.115890;
 
 	constructor(
 		private route: ActivatedRoute,
@@ -59,21 +54,29 @@ export class MapRouteToRestaurantComponent implements OnInit {
 		private restService: RestaurantsService,
 		private routesService: MarkersService,
 		private locationService: LocationService,
+		private deviceService: DeviceDetectorService,
 		@Inject(DOCUMENT) document
 		) { }
 
 	ngOnInit() {
+		// Obtenir l'id de navigation de l'URL
 		const id = +this.route.snapshot.paramMap.get('id');
-		this.getDirection()
-		this.restService.getRestaurantById(id).subscribe(resto => this.restaurant = resto);
-		this.routesService.getRoutes().subscribe(data => {
-			this.steps = data.step
-		});
+		this.initDeviceInfos()
 
+		// Récupère les informations du restaurant associé à la commande
+		this.restService.getRestaurantById(id).subscribe(resto => this.restaurant = resto);
+		// Redimensionne la carte en fonction de la taille d'ecran 
 		document.getElementById('map').style.height = (window.screen.height - 260) + "px";
 
-		// 5 seconds
-		setInterval(() => { this.getUserPosition() }, 5000);
+		// Initialisation pour mobile & tablette
+		if (this.isDesktop === false) {
+			// Mise à jour de la position toutes les 5 secondes
+			this.getUserPosition();
+			// 5 secondes
+			setInterval(() => { this.getUserPosition() }, 5000);
+		} else {
+			this.showRestaurant();
+		}
 	}
 
 	goBack(): void {
@@ -82,11 +85,16 @@ export class MapRouteToRestaurantComponent implements OnInit {
 
 	getUserPosition(){
 		this.locationService.getLocation().subscribe(position => {
-			this.userPosition = position.coords;
-			this.dir = {
-		        origin: { lat: this.userPosition.latitude, lng: this.userPosition.longitude },
-				destination: { lat: this.restaurant.lat, lng: this.restaurant.long }
-		    }
+			if (position !== undefined) {
+				this.userPosition = position.coords;	
+			}
+			
+			if (this.userPosition !== position){
+				this.dir = {
+			        origin: { lat: this.userPosition.latitude, lng: this.userPosition.longitude },
+					destination: { lat: this.restaurant.lat, lng: this.restaurant.long }
+			    }
+			}
 		});
 	}
 
@@ -96,16 +104,22 @@ export class MapRouteToRestaurantComponent implements OnInit {
 
 	getDirection() {
 		this.dir = {
-			destination: { lat: 43.700936, lng: 7.268391 },
+			destination: { lat: this.restaurant.lat, lng: this.restaurant.long },
 			origin: { lat: 43.583599, lng: 7.10905 }
 		}
 	}
 
-	public getDirection_O(position){
+	showRestaurant() {
 		this.dir = {
-	        origin: { lat: 43.700936, lng: 7.268391 },
-	        destination: { lat: 43.53599, lng: 7.10905 }
-	    }
+			destination: { lat: this.restaurant.lat, lng: this.restaurant.long },
+			origin: { lat: 43.583599, lng: 7.10905 }
+		}
+		// this.restauPosition = { lat: this.restaurant.lat, lng: this.restaurant.long }
 	}
 
+	initDeviceInfos(){
+      const isMobile = this.deviceService.isMobile();
+      const isTablet = this.deviceService.isTablet();
+      this.isDesktop = this.deviceService.isDesktop();
+	}
 }

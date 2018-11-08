@@ -6,3 +6,7 @@
 .mainContent {
 	padding-top: 15px;
 }
+
+ul.uk-nav {
+	padding-left: 10px;
+}
