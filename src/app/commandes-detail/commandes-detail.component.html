@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="uk-card-body">
-                    <ul *ngIf="comm.listePlats.length != 0; else noDataFound" class="uk-list uk-list-divider">
+                    <ul *ngIf="comm.listePlats.length != 0" class="uk-list uk-list-divider">
                         <li *ngFor="let plat of comm.listePlats">1x {{plat}} </li>
                     </ul>
                 </div>
