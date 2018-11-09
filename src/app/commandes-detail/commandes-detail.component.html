@@ -14,20 +14,22 @@
                             <div class="uk-card-badge uk-label uk-visible@m" [ngClass]="{'label-disabled': comm.statut==='Terminé'}">
                                 {{comm.statut}} 
                             </div>
-                            <h3 class="uk-card-title uk-margin-remove-bottom">Commande passé chez {{restaurant.name}}</h3>
-                            <p class="uk-text-meta uk-margin-remove-top">
-                                Commande n° {{comm.id}}
-                            </p>
+                            <h3 class="uk-card-title uk-margin-remove-bottom">Commande n° {{comm.id}}</h3>
                         </div>
                     </div>
                 </div>
                 <div class="uk-card-body">
+                	<h3 class="uk-card-title uk-margin-remove-bottom">Détail de la commande</h3>
                     <ul *ngIf="comm.listePlats.length != 0" class="uk-list uk-list-divider">
                         <li *ngFor="let plat of comm.listePlats">1x {{plat}} </li>
                     </ul>
                 </div>
                 <div class="uk-card-footer">
-                    <p class="uk-text-lead">Commande passé le 09/11/18</p>
+                	<ul class="uk-list">
+                		<li>Commande passé le 09/11/18</li>
+                		<li>Commande passé chez {{restaurant.name}}</li>
+                		<li>Méthode de paiement : Carte Bleu</li>
+                	</ul>
                 </div>
             </div>
         </div>
